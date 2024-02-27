@@ -103,21 +103,22 @@ const Selector = (): JSX.Element => {
             value={input}
             onChange={(e) => handleInputChange(e, index)}
           />
-          {suggestions[index].length > 0 && (
-            <ul className="absolute bg-white flex flex-col gap-4 pl-6 w-[75vw]">
-              {suggestions[index].map((suggestion, suggestionIndex) => (
-                <li
-                  className="text-xl cursor-pointer"
-                  key={suggestion}
-                  onClick={() =>
+
+          {Array.isArray(suggestions[index]) && suggestions[index].length > 0 && (
+    <ul className="absolute bg-white flex flex-col gap-4 pl-6 w-[75vw]">
+        {suggestions[index].map((suggestion, suggestionIndex) => (
+            <li
+                className="text-xl cursor-pointer"
+                key={suggestion}
+                onClick={() =>
                     handleSuggestionClick(suggestion, index, suggestionIndex)
-                  }
-                >
-                  {formatSymptom(suggestion)}
-                </li>
-              ))}
-            </ul>
-          )}
+                }
+            >
+                {formatSymptom(suggestion)}
+            </li>
+        ))}
+    </ul>
+)}
           <button
             className="px-4 py-2 bg-[#f2e94e] rounded-xl"
             onClick={() => handleInputRemove(index)}
